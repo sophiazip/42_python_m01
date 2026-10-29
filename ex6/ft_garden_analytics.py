@@ -4,7 +4,7 @@ from __future__ import annotations
 
 
 class Plant:
-    class _Stats:
+    class Stats:
         def __init__(self) -> None:
             self.grow_calls = 0
             self.age_calls = 0
@@ -30,7 +30,7 @@ class Plant:
         self._height = height
         self._age = age
         self._growth_rate = growth_rate
-        self._stats = self._Stats()
+        self._stats = self.Stats()
 
     def grow(self) -> None:
         self._height += self._growth_rate
@@ -43,6 +43,14 @@ class Plant:
     def show(self) -> None:
         self._stats.show_calls += 1
         print(f"{self._name}: {self._height:.1f}cm, {self._age} days old")
+
+    @property
+    def name(self) -> str:
+        return self._name
+
+    @property
+    def stats(self) -> Plant.Stats:
+        return (self._stats)
 
     @staticmethod
     def is_more_than_year(age_days: int) -> bool:
@@ -78,7 +86,7 @@ class Flower(Plant):
 
 
 class Tree(Plant):
-    class _Stats(Plant._Stats):
+    class Stats(Plant.Stats):
         def __init__(self) -> None:
             super().__init__()
             self.shade_calls = 0
@@ -95,7 +103,7 @@ class Tree(Plant):
     ) -> None:
         super().__init__(name, height, age, 0.0)
         self.trunk_diameter = trunk_diameter
-        self._stats = self._Stats()
+        self._stats: Tree.Stats = self.Stats()
 
     def produce_shade(self) -> None:
         self._stats.shade_calls += 1
@@ -130,9 +138,9 @@ class Seed(Flower):
 
 
 def display_statistics(plant: Plant) -> None:
-    print(f"[statistics for {plant._name}]")
-    print(plant._stats.display())
-    extra = plant._stats.extra_display()
+    print(f"[statistics for {plant.name}]")
+    print(plant.stats.display())
+    extra = plant.stats.extra_display()
     if extra:
         print(extra)
 
