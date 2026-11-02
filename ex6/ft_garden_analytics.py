@@ -57,7 +57,7 @@ class Plant:
         return age_days > 365
 
     @classmethod
-    def create_anonymous(cls) -> "Plant":
+    def create_anonymous(cls) -> Plant:
         return cls("Unknown plant", 0.0, 0)
 
 
