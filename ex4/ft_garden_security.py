@@ -5,9 +5,9 @@ from __future__ import annotations
 
 class Plant:
     def __init__(self, name: str, height: float, age: int) -> None:
-        self._name = name
-        self._height = 0.0
-        self._age = 0
+        self._name: str = name
+        self._height: float = 0.0
+        self._age: int = 0
         self.set_height(height)
         self.set_age(age)
 
@@ -15,14 +15,14 @@ class Plant:
         if height < 0:
             print(f"{self._name}: Error, height can't be negative")
             return False
-        self._height = height
+        self._height = float(height)
         return True
 
     def set_age(self, age: int) -> bool:
         if age < 0:
             print(f"{self._name}: Error, age can't be negative")
             return False
-        self._age = age
+        self._age = int(age)
         return True
 
     def get_height(self) -> float:
